@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <div class="row mb-4">
+                    <div class="row mb-4 align-items-center">
                         <div class="col-auto">
                             <label for="networkoperators">Select Network:</label>
                         </div>
@@ -35,17 +35,17 @@
                         </div>
         
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-4 align-items-center">
                         <div class="col-auto ">
                             <label for="amount">Amount:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="number" name="amount" id="amount">
+                            <input required type="number" name="amount" id="amount">
                         </div>
                     </div>
                     <div class="row mb-4 align-items-center">
                         <div class="col-auto">
-                            <input type="text">
+                            <input type="text" id="codeoutput">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary" onclick="generate()">Generate</button>
@@ -53,12 +53,12 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-auto">
                             <label for="">Enter Pin:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text">
+                            <input type="text" id="code">
                         </div>
                         <div class="col-auto">
                             <button class="btn btn-primary" onclick="recharge()">Recharge</button>
@@ -75,16 +75,18 @@
               <tr>
                 <th scope="col">S/N</th>
                 <th scope="col">Network Operator</th>
+                <th scope="col">Amount</th>
                 <th scope="col">Pin</th>
                 <th scope="col">Code</th>
                 <th scope="col">Status</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Date Used</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody id="tbody">
                 <tr>
-                    <td colspan="7">
+                    <td colspan="8">
                         No record here.
                     </td>
                 </tr>
