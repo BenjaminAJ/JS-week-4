@@ -10,13 +10,21 @@ let rechargeCodes = {
     airtel : '*126*',
     nineMobile : '*222*',
     glo : '*123*',
-};
-function generatePin(params) {
-    return 2121313;
+}; 
+
+function generatePin() {
+    let pin = [];
+    for (let index = 0; index < 12; index++) {
+       pin.push(Math.floor(Math.random() * 10));
+    }
+    pin = pin.join('');
+    // console.log(pin);
+    return pin;
 };
 
+
 let rechargeCodeOP;
-function generate(params) {
+function generate() {
     const d = new Date();
 
     let recordobject = {
@@ -33,6 +41,10 @@ function generate(params) {
     recordobject.amount = amount.value;
     recordobject.datecreated = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`;
     recordobject.status = 'unused';
+
+    // Check if generated code exits
+    
+
     codeoutput.value = recordobject.code = generatePin();
     if (rechargeCodeOP == 'mtn') {
         recordobject.pin = `${rechargeCodes.mtn}${recordobject.code}#`;
@@ -124,9 +136,17 @@ function loop() {
 function deleteItem(index) {
     if (index == '0') {
         recordarray.shift();
+        tbody.innerHTML = `
+         <tr>
+            <td colspan="8">
+                No record here.
+            </td>
+         </tr>
+
+        `;
     }
     else{
-        recordarray.splice((+index), 1)
+        recordarray.splice((+index), 1);
+        loop();
     }
-    loop();
 };
