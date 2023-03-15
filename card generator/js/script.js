@@ -38,6 +38,10 @@ function generate() {
     };
 
     rechargeCodeOP = recordobject.networkoperator = operator.value;
+    if (amount.value == '') {
+        console.log('enter amount');
+        return
+    }
     recordobject.amount = amount.value;
     recordobject.datecreated = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`;
     recordobject.status = 'unused';
@@ -72,7 +76,8 @@ function doesExist() {
 
     for (let index = 0; index < recordarray.length; index++) {
         if (code == recordarray[index].pin) {
-            exist = true;            
+            exist = true;
+            return exist;
         }
         else{
             exist = false;
