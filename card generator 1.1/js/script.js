@@ -8,16 +8,16 @@ const errorpin = document.getElementById('errorpin');
 
 let recordarray = [];
 let rechargeCodes = {
-    mtn : '*555*',
-    airtel : '*126*',
-    nineMobile : '*222*',
-    glo : '*123*',
-}; 
+    mtn: '*555*',
+    airtel: '*126*',
+    nineMobile: '*222*',
+    glo: '*123*',
+};
 
 function generatePin() {
     let pin = [];
     for (let index = 0; index < 12; index++) {
-       pin.push(Math.floor(Math.random() * 10));
+        pin.push(Math.floor(Math.random() * 10));
     }
     pin = pin.join('');
     // console.log(pin);
@@ -30,13 +30,13 @@ function generate() {
     const d = new Date();
 
     let recordobject = {
-        networkoperator : 'mtn',
-        amount : '200',
-        datecreated : '',
-        dateused : 'Not yet used',
-        pin : '',
-        code : '',
-        status : 'unused',
+        networkoperator: 'mtn',
+        amount: '200',
+        datecreated: '',
+        dateused: 'Not yet used',
+        pin: '',
+        code: '',
+        status: 'unused',
     };
 
     rechargeCodeOP = recordobject.networkoperator = operator.value;
@@ -52,7 +52,7 @@ function generate() {
     recordobject.status = 'unused';
 
     // Check if generated code exist
-    
+
 
     codeoutput.value = recordobject.code = generatePin();
     if (rechargeCodeOP == 'MTN') {
@@ -72,7 +72,8 @@ function generate() {
     recordarray.push(recordobject);
     // console.log(recordarray);
     loop();
-    
+
+
 };
 
 let exist;
@@ -84,9 +85,9 @@ function doesExist() {
             exist = true;
             return exist;
         }
-        else{
+        else {
             exist = false;
-        }  
+        }
     }
     return exist
 }
@@ -108,7 +109,7 @@ function recharge() {
     // console.log(exist);
     exist = doesExist();
     // console.log(exist);
-    
+
 
     if (exist == true) {
         indexExist = getExistIndex();
@@ -116,47 +117,68 @@ function recharge() {
             recordarray[+indexExist].status = 'used';
             recordarray[+indexExist].dateused = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`;
             errorpin.innerText = '';
-            loop();        
+            loop();
         }
-        else{
+        else {
             // alert('Pin has been used');
             errorpin.innerText = '*Pin has been used';
             console.log('Pin has been used');
         }
     }
-    else{
-        if (rechargeCode.value == '' ) {
+    else {
+        if (rechargeCode.value == '') {
             // alert('Enter pin');
 
             console.log('Input is blank');
         }
-        else{
+        else {
             // alert('Code/Pin does not exist');
             errorpin.innerText = '*Code does not exist'
-            console.log('Code does not exist');    
+            console.log('Code does not exist');
         }
     }
 }
 
+let counter = 0;
+
 function loop() {
-    tbody.innerHTML = ''
-    for (let index = 0; index < recordarray.length; index++) {
+
+    const timer = setInterval(function() {
+        if (tbody.innerText == 'No record here.') {
+            tbody.innerText = '';
+        };
+        // tbody.innerHTML = ''
+        // for (let index = 0; index < recordarray.length; index++) {
         tbody.innerHTML += `
-        <tr>
-            <td>${index +1}</td>
-            <td>${recordarray[index].networkoperator}</td>
-            <td>${recordarray[index].amount}</td>
-            <td>${recordarray[index].pin}</td>
-            <td>${recordarray[index].code}</td>
-            <td>${recordarray[index].status}</td>
-            <td>${recordarray[index].datecreated}</td>
-            <td>${recordarray[index].dateused}</td>
-            <td><button class='btn btn-secondary' onclick='deleteItem(${index})'>Del</button></td>
-        </tr>
-        `
-        
-    }
+            <tr>
+                <td>${counter + 1}</td>
+                <td>${recordarray[counter].networkoperator}</td>
+                <td>${recordarray[counter].amount}</td>
+                <td>${recordarray[counter].pin}</td>
+                <td>${recordarray[counter].code}</td>
+                <td>${recordarray[counter].status}</td>
+                <td>${recordarray[counter].datecreated}</td>
+                <td>${recordarray[counter].dateused}</td>
+                <td><button class='btn btn-secondary' onclick='deleteItem(${counter})'>Del</button></td>
+            </tr>
+            `
+        counter++;
+        console.log(counter);
+        console.log(recordarray.length);
+
+        if (counter == (recordarray.length)) {
+            clearInterval(timer);
+            console.log('hey');
+        }
+     
+
+    }, (10));
+
+
+
+    // }
 };
+
 function deleteItem(index) {
     if (recordarray.length == 1) {
         recordarray.shift();
@@ -169,8 +191,12 @@ function deleteItem(index) {
 
         `;
     }
-    else{
+    else {
         recordarray.splice((+index), 1);
+        console.log(counter);
+        tbody.innerText = ''
+        counter = 0
         loop();
     }
 };
+
