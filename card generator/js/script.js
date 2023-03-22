@@ -69,8 +69,19 @@ function generate() {
     }
 
     // console.log(recordobject);
-    recordarray.push(recordobject);
+    if (recordarray == null) {
+        recordarray = [];
+        recordarray.push(recordobject);
+
+    }
+    else{
+        recordarray.push(recordobject);
+    }
+
+    localStorage.setItem('recordarray',JSON.stringify(recordarray));
+
     // console.log(recordarray);
+
     loop();
     
 };
@@ -78,6 +89,7 @@ function generate() {
 let exist;
 function doesExist() {
     let code = rechargeCode.value;
+    code = code.trim();
 
     for (let index = 0; index < recordarray.length; index++) {
         if (code == recordarray[index].pin) {
@@ -93,6 +105,7 @@ function doesExist() {
 let indexExist;
 function getExistIndex() {
     let code = rechargeCode.value;
+    code = code.trim();
 
     for (let index = 0; index < recordarray.length; index++) {
         if (code == recordarray[index].pin) {
@@ -112,10 +125,13 @@ function recharge() {
 
     if (exist == true) {
         indexExist = getExistIndex();
+        
+        console.log(recordarray);
         if (recordarray[+indexExist].dateused == 'Not yet used') {
             recordarray[+indexExist].status = 'used';
             recordarray[+indexExist].dateused = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`;
             errorpin.innerText = '';
+            localStorage.setItem('recordarray',JSON.stringify(recordarray));
             loop();        
         }
         else{
@@ -140,22 +156,41 @@ function recharge() {
 
 function loop() {
     tbody.innerHTML = ''
-    for (let index = 0; index < recordarray.length; index++) {
-        tbody.innerHTML += `
+    let array=localStorage.getItem('recordarray');
+    recordarray = JSON.parse(array);
+    // console.log(recordarray);
+    if ( recordarray == null ) {
+    
+        tbody.innerHTML = `
         <tr>
-            <td>${index +1}</td>
-            <td>${recordarray[index].networkoperator}</td>
-            <td>${recordarray[index].amount}</td>
-            <td>${recordarray[index].pin}</td>
-            <td>${recordarray[index].code}</td>
-            <td>${recordarray[index].status}</td>
-            <td>${recordarray[index].datecreated}</td>
-            <td>${recordarray[index].dateused}</td>
-            <td><button class='btn btn-secondary' onclick='deleteItem(${index})'>Del</button></td>
+           <td colspan="9">
+               No record here.
+           </td>
         </tr>
-        `
-        
+    
+       `;
+
+    }    
+    else{
+        for (let index = 0; index < recordarray.length; index++) {
+            tbody.innerHTML += `
+            <tr>
+                <td>${index +1}</td>
+                <td>${recordarray[index].networkoperator}</td>
+                <td>${recordarray[index].amount}</td>
+                <td>${recordarray[index].pin}</td>
+                <td>${recordarray[index].code}</td>
+                <td>${recordarray[index].status}</td>
+                <td>${recordarray[index].datecreated}</td>
+                <td>${recordarray[index].dateused}</td>
+                <td><button class='btn btn-secondary' onclick='deleteItem(${index})'>Del</button></td>
+            </tr>
+            `
+            
+        }
+
     }
+
 };
 function deleteItem(index) {
     if (recordarray.length == 1) {
@@ -174,3 +209,4 @@ function deleteItem(index) {
         loop();
     }
 };
+loop();

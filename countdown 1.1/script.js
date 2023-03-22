@@ -45,7 +45,7 @@ function startCountdown() {
             minscount.value = 60;
         }
     }
-    else if (hourscount.value == 0 && minscount.value == 0 && seccount.value == 0 ) {
+    else if (+hourscount.value == 0 && +minscount.value == 0 && +seccount.value == 0 ) {
         alert('Countdown done!!😜')
         clearInterval(intervaltimer);
     }

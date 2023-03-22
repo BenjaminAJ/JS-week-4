@@ -36,20 +36,11 @@
                     <input required type="number" name="" id="sec" class="form-control" value="00" min="0" max="60" style="width: 70px;">
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-primary" onclick="startCountdown()">Start</button>
-                </div>
-                <div class="col-auto">
-                    <button class="btn btn-primary" onclick="stopCountdown()">Stop</button>
+                    <button class="btn btn-primary" onclick="startCount()">Start</button>
                 </div>
                 <p class="form-text text-danger" id="blankFields"></p>
             </div>
-            <div class="row align-items-center mt-5 mb-2 justify-content-center">
-                <div class="col-auto">
-                    <input type="datetime" disabled name="" id="minscount" value="00" style="width: 70px;" class="form-control">
-                </div>
-                <div class="col-auto">
-                    <input type="datetime" disabled name="" id="seccount" value="00" style="width: 70px;" class="form-control">
-                </div>
+            <div class="row align-items-center mt-5 mb-2 justify-content-center" id="timers">
             </div>
         </div>
     </main>
