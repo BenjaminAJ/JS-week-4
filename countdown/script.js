@@ -37,6 +37,10 @@ function startCount() {
     // console.log(timearray);
 
     // startCountDown(index);
+    index = timearray.length -1;
+
+    setTimeout(startCountDown(index), 3500 * index / 2);
+
 
     loop();
 
@@ -59,16 +63,19 @@ function startCountDown(index) {
     console.log(timearray);
     timearray[index].interval = setInterval(function () {
             
-            console.log(timearray[index].sec);  
-            console.log(timearray[index].mins);
+            // console.log(timearray[index].sec);  
+            // console.log(timearray[index].mins);
     
             document.getElementById(`minscount${index}`).value= timearray[index].mins ;
             document.getElementById(`seccount${index}`).value= timearray[index].sec;
             if (+timearray[index].sec == 0 && +timearray[index].mins == 0) {
+                // console.log(timearray);
+                // console.log(index);
+                // console.log(timearray[index].interval);
                 clearInterval(timearray[index].interval);
                 // stopCountdown(index);
-                console.log('hey');
-                // alert("Countdown Done!!!!!😜😜");
+                // console.log('hey');
+                alert("Countdown Done!!!!!😜😜");
             }
             else if (+timearray[index].mins != 0 && (+timearray[index].sec == 0 || +timearray[index].sec == 1)) {
                 +timearray[index].mins--;
@@ -79,12 +86,15 @@ function startCountDown(index) {
             }
     
         }, 1000);
-    
+        
 
     console.log(timearray);
 }
 
 function stopCountdown(index) {
+    // console.log(timearray);
+    // console.log(index);
+    // console.log(timearray[index].interval);
     clearInterval(timearray[index].interval);
 }
 
@@ -124,7 +134,7 @@ function loop() {
         </div>
         `;
         // startCountDown(index);
-        setTimeout(startCountDown(index), 3500);
+        // setTimeout(startCountDown(index), 3500);
 
 
     }

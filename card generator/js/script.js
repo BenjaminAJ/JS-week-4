@@ -126,7 +126,7 @@ function recharge() {
     if (exist == true) {
         indexExist = getExistIndex();
         
-        console.log(recordarray);
+        // console.log(recordarray);
         if (recordarray[+indexExist].dateused == 'Not yet used') {
             recordarray[+indexExist].status = 'used';
             recordarray[+indexExist].dateused = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`;
@@ -206,6 +206,9 @@ function deleteItem(index) {
     }
     else{
         recordarray.splice((+index), 1);
+        // console.log(recordarray);
+
+        localStorage.setItem('recordarray', JSON.stringify(recordarray))
         loop();
     }
 };
