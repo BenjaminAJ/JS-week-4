@@ -12,6 +12,26 @@
     crossorigin="anonymous"></script>
 
 </head>
+<style>
+    body{
+        overflow: hidden;
+    }
+    #reminder{
+        visibility: hidden;
+        position: absolute;
+        bottom: 200px;
+        right: 100px;
+        animation: move infinite 2s ease;
+    }
+    @keyframes move {
+        from{
+            transform: translateX(0px);
+        }
+        to{
+            transform: translateX(4px);
+        }
+    }
+</style>
 <body>
     <section>
         <div class="container text-center">
@@ -23,6 +43,12 @@
     <main class="container-fluid">
         <div class="container">
             <div class="row align-items-center mt-5 mb-2">
+                <div class="col-auto">
+                    <label for="reminderNote" class="col-form-label">Reminder Note:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" class="form-control" id="reminderNote" placeholder="type something here...">
+                </div>
                 <div class="col-auto">
                     <label for="Mins" class="col-form-label">Mins</label>
                   </div>  
@@ -44,6 +70,10 @@
             </div>
         </div>
     </main>
+    <div class="container-fluid">
+        <div class="row align-items-center gap-2" id="reminder">
+        </div>
+    </div>
     
 </body>
 <script src="./script.js"></script>
