@@ -172,22 +172,38 @@ function loop() {
 
     }    
     else{
-        for (let index = 0; index < recordarray.length; index++) {
+        recordarray.forEach(function (params, index) {
             tbody.innerHTML += `
             <tr>
                 <td>${index +1}</td>
-                <td>${recordarray[index].networkoperator}</td>
-                <td>${recordarray[index].amount}</td>
-                <td>${recordarray[index].pin}</td>
-                <td>${recordarray[index].code}</td>
-                <td>${recordarray[index].status}</td>
-                <td>${recordarray[index].datecreated}</td>
-                <td>${recordarray[index].dateused}</td>
+                <td>${params.networkoperator}</td>
+                <td>${params.amount}</td>
+                <td>${params.pin}</td>
+                <td>${params.code}</td>
+                <td>${params.status}</td>
+                <td>${params.datecreated}</td>
+                <td>${params.dateused}</td>
                 <td><button class='btn btn-secondary' onclick='deleteItem(${index})'>Del</button></td>
             </tr>
             `
+
+        });
+        // for (let index = 0; index < recordarray.length; index++) {
+        //     tbody.innerHTML += `
+        //     <tr>
+        //         <td>${index +1}</td>
+        //         <td>${recordarray[index].networkoperator}</td>
+        //         <td>${recordarray[index].amount}</td>
+        //         <td>${recordarray[index].pin}</td>
+        //         <td>${recordarray[index].code}</td>
+        //         <td>${recordarray[index].status}</td>
+        //         <td>${recordarray[index].datecreated}</td>
+        //         <td>${recordarray[index].dateused}</td>
+        //         <td><button class='btn btn-secondary' onclick='deleteItem(${index})'>Del</button></td>
+        //     </tr>
+        //     `
             
-        }
+        // }
 
     }
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body class="bg-danger">
+    <div class="container text-white mt-5">
+        <span class="text" id="text"></span> <span>|</span>
+    </div>
+</body>
+<script>
+    const pElement = document.getElementById('text');
+    let letterinterv;
+    let itemiterator;
+    let textArray = ['I am Benjamin', 'hey'];
+    // console.log(arry.length);
+    let arrayIndex = 0;
+    let charIndex = 0;
+    let inputText;
+
+
+    function type() {
+
+        if (arrayIndex < textArray.length) {
+            const currentText = textArray[arrayIndex];
+            if (charIndex < currentText.length) {
+                pElement.innerHTML += currentText.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                arrayIndex++;
+                charIndex = 0;
+                pElement.innerHTML += " ";
+                setTimeout(type, 500);
+            }
+        }
+        else {
+            inputText = pElement.innerText;
+            let deletetimer = setInterval(() => {
+                // console.log(inputText);
+                if (inputText == '') {
+                    clearInterval(deletetimer);
+                }
+                inputText = inputText.slice(0, -1);
+                pElement.innerText = inputText;
+            }, 100);
+
+        }
+    }
+
+    type();
+
+</script>
+
+</html>
