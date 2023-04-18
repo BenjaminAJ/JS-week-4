@@ -123,7 +123,7 @@ function recharge() {
     // console.log(exist);
     
 
-    if (exist == true) {
+    if (exist) {
         indexExist = getExistIndex();
         
         // console.log(recordarray);

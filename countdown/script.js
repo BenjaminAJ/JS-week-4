@@ -118,14 +118,7 @@ function startCountDown(index) {
                 // console.log('hey');
                 // alert("Countdown Done!!!!!😜😜");
             }
-            else if (+timearray[index].mins != 0 && (+timearray[index].sec == 0 || +timearray[index].sec == 1)) {
-                +timearray[index].mins--;
-                timearray[index].sec = 59;
-            }
-            else if (+timearray[index].mins != 0 || +timearray[index].sec == 60 || +timearray[index].sec != 0) {
-                timearray[index].sec--;
-            }
-    
+czzz    
         }, 1000);
 
         timearray[index].status = 'active';
